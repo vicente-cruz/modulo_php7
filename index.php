@@ -23,7 +23,9 @@
                             (function soma(int $a, int$b):int {return $a + $b;})
                         </button>
                     </div>
-                    <div id="card-aula1e2" class="collapse" data-parent="#accordion">
+                    <div id="card-aula1e2"
+                         class="collapse"
+                         data-parent="#accordion">
                         <div class="card-body">
                             <div>
                                 <p>Introdução com somas!</p>
@@ -477,6 +479,160 @@
         echo 
     }
                                     </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#card-aula7"
+                                aria-controls="card-aula7">Aula 7: Arrays em constantes!</button>
+                    </div>
+                    <div id="card-aula7"
+                         class="collapse"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    Pré-PHP7:
+                                    <?php
+                                        define("CONFIG_DBNAME","meuBanco");
+                                        define("CONFIG_DBUSER","meuUser");
+                                        define("CONFIG_DBPASS","meuPass");
+
+                                        echo "<br/>".CONFIG_DBNAME."-".CONFIG_DBUSER;
+                                    ?>
+                                </div>
+                                <div class="col-9">
+                                    <pre>
+    define("CONFIG_DBNAME","meuBanco");
+    define("CONFIG_DBUSER","meuUser");
+    define("CONFIG_DBPASS","meuPass");
+
+    echo CONFIG_DBNAME."-".CONFIG_DBUSER;
+                                    </pre>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-3">
+                                    PHP-7:
+                                    <?php
+                                    define("CONFIG",array
+                                        ('dbname' => 'meuBanco'
+                                        ,'dbuser' => 'meuUser'
+                                        ,'dbpass' => 'meuPass'
+                                    ));
+                                    
+                                    echo "<br/>Usuario do banco: ". CONFIG['dbuser'];
+                                    ?>
+                                </div>
+                                <div class="col-9">
+                                    <pre>
+    define("CONFIG",array
+        ('dbname' => 'meuBanco'
+        ,'dbuser' => 'meuUser'
+        ,'dbpass' => 'meuPass'
+    ));
+
+    echo "Usuario do banco: ". CONFIG['dbuser'];
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#card-aula8"
+                                aria-controls="card-aula8">Aula 8: Depreciações importantes!</button>
+                    </div>
+                    <div id="card-aula8"
+                         class="collapse"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    Pré-PHP7: construtor com nome da classe
+                                    <pre>
+    class Carro {
+        function Carro()
+        {
+            echo "Classe construída!";
+        }
+    }
+
+    $carro = new Carro();
+                                    </pre>
+                                </div>
+                                <div class="col">
+                                    PHP-7:
+                                    <pre>
+    class Carro {
+        function <strong>__construct()</strong>
+        {
+            echo "Classe construída!";
+        }
+    }
+
+    $carro = new Carro();
+                                    </pre>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col">
+                                    Pré PHP-7: executando funções estáticas
+                                    <pre>
+    class Carro
+    {
+        public function rodar()
+        {
+            echo "Rodando!!";
+        }
+    }
+
+    Carro::rodar();
+                                    </pre>
+                                </div>
+                                <div class="col">
+                                    PHP-7
+                                    <pre>
+    class Carro
+    {
+        public <strong>static</strong> function rodar()
+        {
+            echo "Rodando!!";
+        }
+    }
+
+    Carro::rodar();
+                                    </pre>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col">
+                                    Pré PHP7: conexão com MySQL
+                                    <pre>
+    mysql_connect("localhost","root");
+    mysql_select_db("meuBanco");
+    mysql_query("SELECT * FROM MinhaTabela");
+    mysql_num_rows();
+    mysql_fetch_assoc();
+                                    </pre>
+                                </div>
+                                <div class="col">
+                                    PHP 7: Usar PDO ou mysqli
                                 </div>
                             </div>
                         </div>
