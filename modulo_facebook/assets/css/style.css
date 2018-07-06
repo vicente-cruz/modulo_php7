@@ -1,0 +1,23 @@
+.widget {
+    margin-bottom:20px;
+}
+
+.sugestaoitem {
+    height:40px;
+    line-height:40px;
+    padding-top:5px;
+}
+
+.requisicaoitem {
+    height:40px;
+    line-height:40px;
+    padding-top:5px;
+}
+
+.post_area {
+    border-bottom:1px solid #CCC
+}
+
+.post_area textarea {
+    height:100px;
+}
