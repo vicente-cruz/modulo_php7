@@ -45,7 +45,19 @@ class Posts extends Model
         $ids = $r->buscarRelacoes($id);
         $ids[] = $id;
         
-        $sql = " SELECT pos.*, usu.nome AS nome "
+        $sql = " SELECT pos.*"
+                . ", usu.nome AS nome "
+                . ", (SELECT "
+                . "     COUNT(*) "
+                . "     FROM posts_likes AS pl"
+                . "     WHERE pl.id_post = pos.id"
+                . "  ) AS likes "
+                . ", (SELECT "
+                . "     COUNT(*)"
+                . "     FROM posts_likes AS pl"
+                . "     WHERE pl.id_post = pos.id"
+                . "         AND pl.id_usuario = :meu_id"
+                . "  ) AS liked "
                 . " FROM posts AS pos"
                 . "     INNER JOIN usuarios AS usu"
                 . "     ON usu.id = pos.id_usuario"
@@ -61,13 +73,94 @@ class Posts extends Model
         for ($i = 0; $i < count($ids); $i++) {
             $query->bindValue(":id".$i,$ids[$i]);
         }
+        $query->bindValue(":meu_id",$id);
         $query->execute();
         
         if ($query->rowCount() > 0) {
             $feeds = $query->fetchAll();
+            
+            for ($i = 0; $i < count($feeds); $i++) {
+                $feeds[$i]['comentarios'] =
+                    $this->buscarComentariosPost($feeds[$i]['id']);
+            }
         }
         
         return $feeds;
+    }
+    
+    public function buscarComentariosPost($id_post)
+    {
+        $comentarios = array();
+        
+        $sql = "SELECT pc.*, usu.nome AS nome_comentario"
+                . " FROM posts_comentarios AS pc "
+                . "     INNER JOIN usuarios AS usu"
+                . "     ON usu.id = pc.id_usuario"
+                . " WHERE id_post = :id_post";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_post",$id_post);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            $comentarios = $query->fetchAll();
+        }
+        
+        return $comentarios;
+    }
+    
+    public function verificarLike($id_post, $id_usuario)
+    {
+        $liked = FALSE;
+        
+        $sql = "SELECT COUNT(*) AS liked"
+                . " FROM posts_likes"
+                . " WHERE id_post = :id_post"
+                . "     AND id_usuario = :id_usuario";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_post",$id_post);
+        $query->bindValue(":id_usuario",$id_usuario);
+        $query->execute();
+        
+        if ($query->rowCount() > 0) {
+            $resp = $query->fetch();
+            if ($resp['liked'] > 0) {
+                $liked = TRUE;
+            }
+        }
+        
+        return $liked;
+    }
+    
+    public function removerLike($id_post,$id_usuario)
+    {
+        $sql = "DELETE FROM posts_likes"
+                . " WHERE id_post = :id_post AND id_usuario = :id_usuario";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_post",$id_post);
+        $query->bindValue(":id_usuario",$id_usuario);
+        $query->execute();
+    }
+    
+    public function adicionarLike($id_post,$id_usuario)
+    {
+        $sql = "INSERT INTO posts_likes(id_post, id_usuario)"
+                . " VALUES (:id_post, :id_usuario)";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_post",$id_post);
+        $query->bindValue(":id_usuario",$id_usuario);
+        $query->execute();
+    }
+    
+    public function adicionarComentario($id_post,$id_usuario,$txt)
+    {
+        $sql = "INSERT INTO "
+                . "posts_comentarios(id_post,id_usuario,data_criacao,texto)"
+                . " VALUES "
+                . "(:id_post,:id_usuario,NOW(),:txt)";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_post",$id_post);
+        $query->bindValue(":id_usuario",$id_usuario);
+        $query->bindValue(":txt",$txt);
+        $query->execute();
     }
 }
 ?>

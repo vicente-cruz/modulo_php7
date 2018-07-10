@@ -8,7 +8,7 @@
                 user-scalable=no,
                 initial-scale=1.0,
                 shrink-to-fit=no" />
-        <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../bootstrap4/css/bootstrap.min.css" />
     </head>
     <body>
         <div class="container">
@@ -640,7 +640,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="bootstrap4/js/jquery.min.js"></script>
-        <script type="text/javascript" src="bootstrap4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../bootstrap4/js/jquery.min.js"></script>
+        <script type="text/javascript" src="../bootstrap4/js/bootstrap.min.js"></script>
     </body>
 </html>

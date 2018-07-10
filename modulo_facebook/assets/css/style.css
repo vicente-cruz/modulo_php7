@@ -32,3 +32,7 @@
     padding:10px;
     background-color:#EEE;
 }
+
+.postitem_comentario {
+    display:none;
+}
