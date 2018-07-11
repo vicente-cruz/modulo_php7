@@ -12,6 +12,7 @@ class homeController extends Controller
         $u = new Usuarios();
         $p = new Posts();
         $r = new Relacionamentos();
+        $g = new Grupos();
         
         $dados['usuario_nome'] = $u->buscarNome($_SESSION['lgsocial']);
         
@@ -28,12 +29,24 @@ class homeController extends Controller
             $p->adicionarPost($_SESSION['lgsocial'], $post, $foto);
         }        
         
+        // Verifica se não foi criado nenhum grupo
+        $grupo = filter_input(INPUT_POST,'grupo');
+        if ( ! empty($grupo)) {
+            $grupo = addslashes($grupo);
+            $idGrupo = $g->criarGrupo($_SESSION['lgsocial'], $grupo);
+            
+            if ($idGrupo > 0) {
+                header("Location: ".BASE_URL."grupos/abrir/".$idGrupo);
+            }
+        }
+        
         $dados['sugestoes'] = $u->buscarSugestoes($_SESSION['lgsocial'], 3);
         $dados['reqAmizades'] = $r->buscarReqAmizades($_SESSION['lgsocial']);
         $dados['totalAmigos'] = count(
                 $r->buscarRelacoes($_SESSION['lgsocial'],"AND status = 1")
             );
         $dados['feeds'] = $p->buscarFeeds($_SESSION['lgsocial']);
+        $dados['grupos'] = $g->buscarGrupos();
         
         $this->loadTemplate("home",$dados);
     }

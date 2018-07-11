@@ -14,6 +14,17 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="<?php echo BASE_URL; ?>">Facebook Cover</a>
+            <form method="GET" class="form-inline" action="<?php echo BASE_URL?>busca">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" 
+                               placeholder="Buscar..." />
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-default" value="Buscar"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <button class="navbar-toggler" type="button"
                     data-toggle="collapse"
                     data-target="#navbarMenu"

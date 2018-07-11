@@ -53,11 +53,29 @@
                     <strong><?php echo $pessoa['nome']; ?></strong>
                 </div>
                 <div class="col-sm-4">
-                    <button class="btn btn-default" onclick="adicionarAmigo(<?php echo $pessoa['id']; ?>, this)">+</button>
+                    <button class="btn btn-default"
+                            onclick="adicionarAmigo(<?php echo $pessoa['id']; ?>, this)">+</button>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
+        
+        <div class="widget">
+            <h4>Grupos</h4>
+            <form method="POST">
+                <div class="input-group">
+                    <input type="text" name="grupo" class="form-control"
+                           placeholder="Nome do grupo"/>
+                    <div class="input-group-append">
+                        <input type="submit" value="Criar"
+                               class="btn btn-outline-secondary" />
+                    </div>
+                </div>
+            </form>
+            <?php foreach($grupos as $grupo): ?>
+            <a href="<?php echo BASE_URL; ?>grupos/abrir/<?php echo $grupo['id']; ?>"><?php echo $grupo['titulo']; ?></a><br/>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>

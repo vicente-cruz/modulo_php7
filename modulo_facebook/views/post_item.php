@@ -19,13 +19,13 @@
     </div>
     <div class="postitem_comentarios">
         <?php if (count($comentarios) > 0): ?>
-        <strong>Comentários</strong><br/>
-        <?php foreach($comentarios as $comentario):?>
+            <strong>Comentários</strong><br/>
+            <?php foreach($comentarios as $comentario):?>
 
-            <strong><?php echo $comentario['nome_comentario']; ?> </strong>
-            (<?php echo date("d/m/Y - H:i", strtotime($comentario['data_criacao'])); ?>):
-            <?php echo $comentario['texto']; ?>
-        <?php endforeach; ?>
+                <strong><?php echo $comentario['nome_comentario']; ?> </strong>
+                (<?php echo date("d/m/Y - H:i", strtotime($comentario['data_criacao'])); ?>):
+                <?php echo $comentario['texto']; ?><br/>
+            <?php endforeach; ?>
         <?php endif; ?>
     </div>
 </div>

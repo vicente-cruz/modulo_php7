@@ -149,5 +149,22 @@ class Usuarios extends Model
         
         return $sugestoes;
     }
+    
+    public function procurar($id,$q)
+    {
+        $resultadoBusca = array();
+        
+        $sql = "SELECT * FROM usuarios WHERE nome LIKE :q AND id != :id";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(':id',$id);
+        $query->bindValue(':q','%'.$q.'%');
+        $query->execute();
+        
+        if ($query->rowCount() > 0) {
+            $resultadoBusca = $query->fetchAll();
+        }
+        
+        return $resultadoBusca;
+    }
 }
 ?>

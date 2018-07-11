@@ -1,43 +1,56 @@
 <?php
 class Posts extends Model
 {
-    public function adicionarPost($id,$post, $foto)
+    public function adicionarFotoPost($foto)
     {
-        $tipo_post = 'texto';
-        $url = '';
+        $dados_foto = array(
+            'url' => ''
+        ,   'tipo_post' => 'texto'
+        );
         
         if (count($foto) > 0) {
             $tipos = array('image/jpeg', 'image/jpg', 'image/png');
             if (in_array($foto['type'], $tipos)) {
-                $tipo_post = 'foto';
-                $url = md5(time().rand(0,999));
+                $dados_foto['tipo_post'] = 'foto';
+                $dados_foto['url'] = md5(time().rand(0,999));
                 switch($foto['type']) {
                     case 'image/jpeg':
                     case 'image/jpg':
-                        $url .= '.jpg';
+                        $dados_foto['url'] .= '.jpg';
                         break;
                     case 'image/png':
-                        $url .= '.png';
+                        $dados_foto['url'] .= '.png';
                         break;
                 }
-                move_uploaded_file($foto['tmp_name'], 'assets/images/posts/'.$url);
+                move_uploaded_file($foto['tmp_name']
+                        , 'assets/images/posts/'.$dados_foto['url']);
             }
         }
+        
+        return $dados_foto;
+    }
+    
+    public function adicionarPost($id_usuario,$post, $foto, $id_grupo = 0)
+    {
+        $dados_foto = $this->adicionarFotoPost($foto);
+        
+        $url = $dados_foto['url'];
+        $tipo_post = $dados_foto['tipo_post'];
         
         $sql = " INSERT INTO "
                 . "posts(id_usuario,data_criacao,tipo,texto,url,id_grupo)"
                 . " VALUES "
                 . "(:id_usuario,NOW(),:tipo,:texto,:url,:id_grupo)";
         $query = $this->db->prepare($sql);
-        $query->bindValue(':id_usuario',$id);
+        $query->bindValue(':id_usuario',$id_usuario);
         $query->bindValue(':tipo',$tipo_post);
         $query->bindValue(':texto',$post);
         $query->bindValue(':url',$url);
-        $query->bindValue(':id_grupo',0);
+        $query->bindValue(':id_grupo',$id_grupo);
         $query->execute();
     }
     
-    public function buscarFeeds($id)
+    public function buscarFeeds($id, $id_grupo = 0)
     {
         $feeds = array();
         
@@ -66,14 +79,16 @@ class Posts extends Model
         for ($i = 0;$i < count($ids); $i++) {
             $sql_ids .= ":id".$i.",";
         }
-        $sql_ids = substr($sql_ids,0,-1).") ORDER BY data_criacao DESC ";
+        $sql_ids = substr($sql_ids,0,-1).")";
         $sql .= $sql_ids;
+        $sql .=  " AND id_grupo = :id_grupo ORDER BY data_criacao DESC";
         
         $query = $this->db->prepare($sql);
         for ($i = 0; $i < count($ids); $i++) {
             $query->bindValue(":id".$i,$ids[$i]);
         }
         $query->bindValue(":meu_id",$id);
+        $query->bindValue(":id_grupo",$id_grupo);
         $query->execute();
         
         if ($query->rowCount() > 0) {
