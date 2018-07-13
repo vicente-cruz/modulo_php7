@@ -1,0 +1,20 @@
+Options +Indexes
+IndexOptions FancyIndexing
+
+#DirectoryIndex aula_htaccess.php
+
+#IndexIgnore *.txt
+
+#AddType application/x-httpd-php .vicente
+
+#<files file1.txt>
+#    order allow,deny
+#    deny from all
+#</files>
+
+#<FilesMatch "\.(txt|vicente)$">
+#    order allow,deny
+#    deny from all
+#</FilesMatch>
+
+#AddDefaultCharset UTF-8
