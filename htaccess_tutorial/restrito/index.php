@@ -1,0 +1,1 @@
+Acessando área restrita!

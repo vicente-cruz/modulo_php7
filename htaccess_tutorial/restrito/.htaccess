@@ -1,0 +1,4 @@
+AuthName "Admin Only"
+AuthType Basic
+AuthUserFile C:/xampp7/htdocs/cursophp7/htaccess_tutorial/.htpasswd
+require valid-user

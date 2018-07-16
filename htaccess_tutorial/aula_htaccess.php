@@ -23,7 +23,7 @@
                             HTACCESS: Options</button>
                     </div>
                     <div id="card1_options"
-                         class="collapse show"
+                         class="collapse"
                          data-parent="#accordion">
                         <div class="card-body">
                             <div class="row">
@@ -114,10 +114,83 @@
                                     Define charset padrão do diretorio para UTF-8
                                 </div>
                             </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    ErrorDocument 404 /errors/404.php
+                                </div>
+                                <div class="col-md-6">
+                                    Redireciona páginas não encontradas para /errors/404.php
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <br/>
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#card-htaccess_password"
+                                aria-controls="card-htaccess_password">
+                            HTACCESS com senha para acessar diretório
+                        </button>
+                    </div>
+                    <div id="card-htaccess_password"
+                         class="collapse"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            Criar diretório de acesso restrito e, dentro dele, os arquivos.<br/>
+                                            Ex: admin/index.php
+                                        </li>
+                                        <li class="list-group-item">Criar arquivo .htpasswd.<br/>
+                                            Ex: $ htpasswd -c .htpasswd vicente</li>
+                                        <li class="list-group-item">
+                                            Criar o arquivo .htaccess DENTRO do diretorio restrito
+                                        </li>
+                                        <li class="list-group-item">
+                                            Preencher com as credenciais:
+                                            <pre>
+AuthName "Admin Only"
+AuthType Basic
+AuthUserFile &lt;Caminho/Absoluto/Arquivo/.htpasswd&gt;
+<strong>#FORA do ROOT ou PUBLIC FOLDER</strong> Ex: C:/xampp7/htdocs/cursophp7/htaccess_tutorial/.htpasswd
+require valid-user
+</pre>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button"
+                                class="btn btn-link"
+                                data-toggle="collapse"
+                                data-target="#card3-urlshortener"
+                                aria-controls="card3-urlshortener">
+                            Encolhimento de URL com HTACCESS
+                        </button>
+                    </div>
+                    <div id="card3-urlshortener"
+                         class="collapse"
+                         data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script type="text/javascript" src="../bootstrap4/js/jquery.min.js"></script>

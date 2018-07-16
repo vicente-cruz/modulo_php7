@@ -1,5 +1,5 @@
-Options +Indexes
-IndexOptions FancyIndexing
+#Options +Indexes
+#IndexOptions FancyIndexing
 
 #DirectoryIndex aula_htaccess.php
 
