@@ -1,0 +1,51 @@
+CURSOS
+- id
+- nome
+- imagem
+- descricao
+
+ALUNOS
+- id
+- nome
+- email
+- senha
+
+ALUNOS_CURSOS
+- id
+- id_aluno
+- id_curso
+
+MODULOS
+- id
+- nome
+- id_curso
+
+AULAS
+- id
+- id_modulo
+- id_curso
+- tipo (video/questionario)
+- ordem
+
+VIDEOS
+- id
+- id_aula
+- nome
+- descricao
+- url
+
+HISTORICO
+- id
+- data
+- id_aluno
+- id_aula
+
+QUESTIONARIOS
+- id
+- id_aula
+- pergunta
+- opcao1
+- opcao2
+- opcao3
+- opcao4
+- resposta

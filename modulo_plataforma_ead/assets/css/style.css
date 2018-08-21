@@ -1,0 +1,29 @@
+.avatar {
+    width:100px;
+    border:1px #DDDDDD solid;
+}
+
+.media {
+    border-radius:5px;
+    background-color:#EEEEEE;
+}
+
+.curso-link {
+    text-decoration:none;
+}
+
+.curso-imagem {
+    border:0;
+    height:60px;
+}
+
+.curso-esquerda {
+    min-height:300px;
+    background-color:#EEEEEE;
+    overflow-y:scroll;
+}
+
+.curso-direita {
+    min-height:300px;
+    overflow-y:scroll;
+}
