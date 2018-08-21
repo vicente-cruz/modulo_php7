@@ -29,7 +29,7 @@ switch (ENVIRONMENT) {
             ,"root"
             ,""
             ,"http://cursophp7.pc/modulo_facebook/"
-            ,"C:/xampp/htdocs/cursophp7/modulo_facebook/");
+            ,"C:/xampp7/htdocs/cursophp7/modulo_facebook/");
         break;
     case "testing":
         setGlobalConfigs("","","","","","","");

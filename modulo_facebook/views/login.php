@@ -14,12 +14,14 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="<?php echo BASE_URL; ?>">Facebook Cover</a>
-            <button class="navbar-toggler" type="button"
+            <button class="navbar-toggler"
+                    type="button"
                     data-toggle="collapse"
                     data-target="#navbarMenu"
                     aria-controls="navbarMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div id="navbarMenu" class="navbar-collapse collapse justify-content-end">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="<?php echo BASE_URL; ?>login/entrar">Login</a>
