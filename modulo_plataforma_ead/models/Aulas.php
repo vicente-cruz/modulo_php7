@@ -58,6 +58,8 @@ class Aulas extends Modulos
             $aulas = $query->fetchAll();
             
             foreach ($aulas as $aKey => $aValue) {
+                $aulas[$aKey]['assistido'] = $this->verificarAulaAssistida(
+                        $aValue['id'],$_SESSION['lgaluno']);
                 if ($aValue['tipo'] == 'video') {
                     $sql = "SELECT nome FROM videos WHERE id_aula = :id_aula";
                     $query = $this->db->prepare($sql);
@@ -77,6 +79,23 @@ class Aulas extends Modulos
         }
         
         return $aulas;
+    }
+    
+    public function buscarAulasCurso($id_curso)
+    {
+        $id_aulas = array();
+        $sql = "SELECT id FROM aulas WHERE id_curso = :id_curso";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_curso",$id_curso);
+        $query->execute();
+        
+        if ($query->rowCount() > 0) {
+            foreach ($query->fetchAll() as $id_aula) {
+                $id_aulas[] = intval($id_aula['id']);
+            }
+        }
+        
+        return $id_aulas;
     }
     
     public function getCursoAula($id_aula)
@@ -119,6 +138,25 @@ class Aulas extends Modulos
         $query->bindValue(':id_aluno',$id_aluno);
         $query->bindValue(':id_aula',$id_aula);
         $query->execute();
+    }
+    
+    private function verificarAulaAssistida($id_aula, $id_aluno):bool
+    {
+        $sql = " SELECT id "
+                . " FROM historico "
+                . " WHERE id_aluno = :id_aluno AND id_aula = :id_aula ";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_aluno",$id_aluno);
+        $query->bindValue(":id_aula",$id_aula);
+        $query->execute();
+        
+        if ($query->rowCount() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+            
     }
 }
 ?>

@@ -46,6 +46,7 @@ class cursosController extends Controller
         ,   'curso' => array()
         ,   'modulos' => array()
         ,   'aula_info' => array()
+        ,   'aulas_assistidas' => array()
         );
         
         $alunos = new Alunos();
@@ -62,6 +63,9 @@ class cursosController extends Controller
             
             $modulos = new Modulos();
             $dados['modulos'] = $modulos->getModulos($id_curso);
+            
+            $dados['aulas_assistidas'] = $alunos->buscarNumAulasAssistidas($id_curso);
+            $dados['total_aulas'] = count($aula->buscarAulasCurso($id_curso));
             
             $dados['aula_info'] = $aula->getAula($alunos->getId(),$id_aula);
             

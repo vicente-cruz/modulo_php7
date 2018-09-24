@@ -27,6 +27,9 @@
                         <li class="list-group-item list-group-item-action">
                             <a href="<?php echo BASE_URL;?>cursos/aula/<?php echo $aula['id']; ?>" style="color:#666;text-decoration:none;">
                                 <?php echo $aula['nome']; ?>
+                                <?php if ($aula['assistido']): ?>
+                                <img src="<?php echo BASE_URL; ?>assets/images/cursos/v.jpg" height="20" border="0" />
+                                <?php endif; ?>
                             </a>
                         </li>
                         <?php endforeach; ?>

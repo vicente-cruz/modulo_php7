@@ -60,5 +60,27 @@ class Alunos extends Model
     {
         return $this->info['nome'];
     }
+    
+    public function buscarNumAulasAssistidas($id_curso)
+    {
+        $aulas_assistidas = 0;
+        
+        $sql = " SELECT COUNT(*) AS aulas_assistidas"
+                . " FROM historico "
+                . " WHERE id_aluno = :id_aluno "
+                . "     AND id_aula IN"
+                . "     (SELECT aulas.id FROM aulas WHERE aulas.id_curso = :id_curso) ";
+        $query = $this->db->prepare($sql);
+        $query->bindValue(":id_aluno",$this->getId());
+        $query->bindValue(":id_curso",$id_curso);
+        $query->execute();
+        
+        if ($query->rowCount() > 0) {
+            $resp = $query->fetch();
+            $aulas_assistidas = $resp['aulas_assistidas'];
+        }
+        
+        return $aulas_assistidas;
+    }
 }
 ?>

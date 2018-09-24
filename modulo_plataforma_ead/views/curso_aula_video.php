@@ -2,7 +2,10 @@
     <img src="<?php echo BASE_URL; ?>assets/images/cursos/<?php echo $curso->getImagem(); ?>" class="mx-2 avatar align-self-center"/>
     <div class="media-body">
         <h5><?php echo $curso->getNome(); ?></h5>
-        <p><?php echo $curso->getDescricao();?></p>
+        <p>
+            <?php echo $curso->getDescricao();?><br/>
+            <?php echo $aulas_assistidas; ?> / <?php echo $total_aulas; ?>
+        </p>
     </div>
 </div>
 

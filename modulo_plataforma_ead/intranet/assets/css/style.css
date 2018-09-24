@@ -1,0 +1,30 @@
+.avatar {
+    width:100px;
+    border:1px #DDDDDD solid;
+}
+
+fieldset {
+    border:1px solid #000000;
+    padding:0 10px;
+}
+
+legend {
+    width:inherit;
+    padding:0 10px;
+}
+
+h4 {
+    height:35px;
+    line-height:35px;
+    margin:0;
+    margin-bottom:5px;
+    padding-left:20px;
+    background-color:#DDD;
+}
+
+h5 {
+    height:35px;
+    line-height:35px;
+    margin:0;
+    padding-left:40px;
+}
